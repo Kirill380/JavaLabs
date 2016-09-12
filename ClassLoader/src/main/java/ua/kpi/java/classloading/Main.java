@@ -1,6 +1,10 @@
 package ua.kpi.java.classloading;
 
 
+import com.google.common.util.concurrent.Uninterruptibles;
+
+import java.util.concurrent.TimeUnit;
+
 import static com.google.common.collect.ImmutableList.of;
 
 public class Main {
@@ -12,20 +16,14 @@ public class Main {
     }
 
     private void runProgram() throws Exception {
-        ChangeChecker changeChecker = new ChangeChecker(CLASS);
+        FileWatcher changeChecker = new FileWatcher(CLASS);
         new Thread(changeChecker).start();
         while (!stop) {
             ClassLoader loader = new RebelLoader(of("."));
             Class clazz = Class.forName(CLASS, true, loader);
             Object testModule = clazz.newInstance();
             System.out.println(testModule);
-
-            try {
-                Thread.sleep(6 * 1000);
-            } catch (InterruptedException e) {
-                System.err.println("The thread was interrupted");
-                break;
-            }
+            Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
         }
         changeChecker.stop = true;
     }
