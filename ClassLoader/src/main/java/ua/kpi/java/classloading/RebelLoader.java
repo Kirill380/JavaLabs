@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ua.kpi.java.classloading.ChangeChecker.TARGET;
+import static ua.kpi.java.classloading.FileWatcher.TARGET;
 
 public class RebelLoader extends ClassLoader {
 
@@ -45,7 +45,7 @@ public class RebelLoader extends ClassLoader {
             return result;
         }
 
-        File f = findFile(TARGET + name.replace('.', '/'), ".class");
+        File f = findFile(TARGET + name.replace(".", File.separator), ".class");
         System.out.println("Class " + name + (f == null ? "" : " found in " + f));
 
         if (f == null) {
@@ -78,16 +78,13 @@ public class RebelLoader extends ClassLoader {
 
     }
 
-    private File findFile(String name, String extension) {
-        for (String p : classPath) {
-            String fileName = name.replace('/', File.separatorChar);
-            String path = (new File(p)).getPath();
-            File f = new File(path + File.separatorChar + fileName + extension);
+    private File findFile(String fileName, String extension) {
+        File f = new File(fileName + extension);
 
-            if (f.exists()) {
-                return f;
-            }
+        if (f.exists()) {
+            return f;
         }
+
         return null;
     }
 
