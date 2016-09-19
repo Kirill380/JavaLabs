@@ -5,16 +5,20 @@ import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
+import ua.kpi.collections.lists.MyArrayList;
+import ua.kpi.collections.lists.MyList;
 
 import static com.google.common.collect.ImmutableList.of;
 import static java.util.Arrays.asList;
 
 @RunWith(Theories.class)
-public class MyArrayListTest extends Assert  {
+public class MyArrayListTest extends Assert implements MyListTest {
+
     private MyList<String> list;
     public static @DataPoints int[] candidates = { -1, 0 };
 
 
+ 
     @Before
     public void startUp() {
         list = new MyArrayList<>();
@@ -22,13 +26,22 @@ public class MyArrayListTest extends Assert  {
 
 
     @Test
+    @Override
     public void testCopyConstructor() {
         list = new MyArrayList<>(of("a", "b", "c", "d"));
         assertEquals(list.size(), 4);
     }
 
+    @Test
+    @Override
+    public void testGet() {
+        list = new MyArrayList<>(of("a", "b", "c", "d"));
+        assertEquals(list.get(2), "c");
+    }
+
 
     @Test
+    @Override
     public void testAdd() {
         String item = "a";
         list.add(item);
@@ -39,6 +52,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Test
+    @Override
     public void testToArray() {
         String[] exp = new String[]{"a", "b", "c", "d"};
         list = new MyArrayList<String>(asList(exp));
@@ -48,6 +62,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Test
+    @Override
     public void testRemove() {
         list = new MyArrayList<>(of("a", "b", "c", "d"));
         list.remove(1);
@@ -57,6 +72,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Test
+    @Override
     public void testIndexOf() {
         list = new MyArrayList<>(of("a", "b", "c", "d"));
         int index = list.indexOf("c");
@@ -65,6 +81,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Test
+    @Override
     public void testIndexOfNull() {
         list = new MyArrayList<>(asList("a", null, "c", "d", null, "e"));
         int index = list.indexOf(null);
@@ -73,6 +90,14 @@ public class MyArrayListTest extends Assert  {
 
 
     @Test
+    @Override
+    public void testIndexOfNotExist() {
+
+    }
+
+
+    @Test
+    @Override
     public void testSet() {
         list = new MyArrayList<>(of("a", "b", "c", "d"));
         list.set(1, "z");
@@ -82,6 +107,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Test
+    @Override
     public void testAddToIndex() {
         list = new MyArrayList<>(of("a", "b", "c", "d"));
         list.add(1, "z");
@@ -92,6 +118,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Test
+    @Override
     public void testAddAll() {
         list = new MyArrayList<>(of("a", "b", "c", "d"));
         list.addAll(of("e", "f", "g", "h"));
@@ -101,6 +128,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Test
+    @Override
     public void testAddAllToIndex() {
         list = new MyArrayList<>(of("a", "b", "c", "d"));
         list.addAll(2, of("e", "f", "g", "h"));
@@ -134,6 +162,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Theory
+    @Override
     @Test(expected = IndexOutOfBoundsException.class)
     public void testRangeCheckGet(int wrongIndex) {
         list = new MyArrayList<>();
@@ -143,6 +172,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Theory
+    @Override
     @Test(expected = IndexOutOfBoundsException.class)
     public void testRangeCheckAdd(int wrongIndex) {
         list = new MyArrayList<>();
@@ -151,6 +181,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Theory
+    @Override
     @Test(expected = IndexOutOfBoundsException.class)
     public void testRangeCheckAddAll(int wrongIndex) {
         list = new MyArrayList<>();
@@ -159,6 +190,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Theory
+    @Override
     @Test(expected = IndexOutOfBoundsException.class)
     public void testRangeCheckRemove(int wrongIndex) {
         list = new MyArrayList<>();
@@ -167,6 +199,7 @@ public class MyArrayListTest extends Assert  {
 
 
     @Theory
+    @Override
     @Test(expected = IndexOutOfBoundsException.class)
     public void testRangeCheckSet(int wrongIndex) {
         list = new MyArrayList<>();

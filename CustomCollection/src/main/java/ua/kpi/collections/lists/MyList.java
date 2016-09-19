@@ -1,3 +1,5 @@
+package ua.kpi.collections.lists;
+
 import java.util.Collection;
 
 public interface MyList<T> {

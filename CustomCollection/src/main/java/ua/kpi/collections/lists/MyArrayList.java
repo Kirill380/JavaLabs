@@ -1,3 +1,5 @@
+package ua.kpi.collections.lists;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.RandomAccess;
