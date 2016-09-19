@@ -1,4 +1,4 @@
-package ua.kpi.java.classloading;
+package ua.kpi.classloading;
 
 
 import com.google.common.io.Files;
@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static ua.kpi.java.classloading.Constants.TARGET;
 
 public class RebelLoader extends ClassLoader {
 
@@ -45,7 +43,7 @@ public class RebelLoader extends ClassLoader {
             return result;
         }
 
-        File f = findFile(TARGET + File.separator + name.replace(".", File.separator), ".class");
+        File f = findFile(Constants.TARGET + File.separator + name.replace(".", File.separator), ".class");
         System.out.println("Class " + name + (f == null ? "" : " found in " + f));
 
         if (f == null) {

@@ -1,4 +1,4 @@
-package ua.kpi.java.classloading;
+package ua.kpi.classloading;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 
@@ -13,8 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-import static ua.kpi.java.classloading.Constants.SRC;
-import static ua.kpi.java.classloading.Constants.TARGET;
+import static ua.kpi.classloading.Constants.SRC;
+import static ua.kpi.classloading.Constants.TARGET;
 
 public class FileWatcher implements Runnable {
     public volatile boolean stop = false;

@@ -1,4 +1,4 @@
-package ua.kpi.java.classloading;
+package ua.kpi.classloading;
 
 
 import com.google.common.util.concurrent.Uninterruptibles;
