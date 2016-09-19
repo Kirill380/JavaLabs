@@ -8,18 +8,15 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
+import static ua.kpi.java.classloading.Constants.SRC;
+import static ua.kpi.java.classloading.Constants.TARGET;
 
 public class FileWatcher implements Runnable {
-    public static final String SRC = Paths.get("ClassLoader", "src", "main", "java").toUri().getPath();
-    public static final String TARGET = Paths.get("ClassLoader", "target", "classes").toUri().getPath();
     public volatile boolean stop = false;
     private String className;
     private Long lastModified = 0L;
@@ -58,7 +55,7 @@ public class FileWatcher implements Runnable {
         final DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
         final String fileName = className.replace(".", File.separator) + ".java";
         final StandardJavaFileManager manager = compiler.getStandardFileManager(diagnostics, null, null);
-        final File file = new File(Paths.get(SRC, fileName).toUri());
+        final File file = new File(SRC + File.separator + fileName);
         final Iterable<? extends JavaFileObject> sources = manager.getJavaFileObjectsFromFiles(Arrays.asList(file));
         final Iterable<String> options = Arrays.asList("-d", TARGET);
         final JavaCompiler.CompilationTask task = compiler.getTask(null, manager, diagnostics, options, null, sources);

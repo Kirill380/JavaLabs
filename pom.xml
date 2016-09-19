@@ -11,7 +11,7 @@
     <modules>
         <module>ClassLoader</module>
         <module>CustomCollection</module>
-        <module>SkiPass</module>
+        <module>SkiLift</module>
     </modules>
 
 
