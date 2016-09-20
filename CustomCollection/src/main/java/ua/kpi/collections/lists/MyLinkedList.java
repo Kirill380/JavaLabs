@@ -1,6 +1,7 @@
 package ua.kpi.collections.lists;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 public class MyLinkedList<T> implements  MyList<T>{
     private Node<T> head;
@@ -128,6 +129,20 @@ public class MyLinkedList<T> implements  MyList<T>{
     @Override
     public Object[] toArray() {
         return new Object[0];
+    }
+
+
+    public T getFirst() {
+        if (head == null)
+            throw new NoSuchElementException();
+        return head.value;
+    }
+
+
+    public T getLast() {
+        if (tail == null)
+            throw new NoSuchElementException();
+        return tail.value;
     }
 
 
