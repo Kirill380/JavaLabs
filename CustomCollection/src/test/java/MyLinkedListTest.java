@@ -65,6 +65,11 @@ public class MyLinkedListTest extends Assert implements MyListTest {
 
     }
 
+    @Override
+    public void testIndexOfNotExist() {
+
+    }
+
     @Test
     @Override
     public void testSet() {

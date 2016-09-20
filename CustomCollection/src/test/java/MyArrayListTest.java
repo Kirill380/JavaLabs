@@ -92,7 +92,9 @@ public class MyArrayListTest extends Assert implements MyListTest {
     @Test
     @Override
     public void testIndexOfNotExist() {
-
+        list = new MyArrayList<>(of("a", "b", "c", "d"));
+        int index = list.indexOf("e");
+        assertEquals(index, -1);
     }
 
 
