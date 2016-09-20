@@ -1,26 +1,56 @@
 package ua.kpi.java.skilift.skipass;
 
-public class SkiPassFactory {
+import ua.kpi.java.skilift.skipass.types.DayOfWeekType;
+import ua.kpi.java.skilift.skipass.types.LiftsType;
+import ua.kpi.java.skilift.skipass.types.PeriodType;
+import ua.kpi.java.skilift.skipass.types.SeasonType;
+import ua.kpi.java.skilift.transfer.SkiPassRequest;
+import ua.kpi.java.skilift.transfer.SkiPassType;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public final class SkiPassFactory {
     private Long counter = 1L;
+    private Map<Long, SkiPass> skiPasses = new HashMap<>();
 
     private Long nextId() {
         return counter++;
     }
 
-
-    public SkiPass getSkiPass(DayType day, LiftsType liftsType) {
-        return new QuantitativeSkiPass(nextId(), liftsType, day);
+    public SkiPass geSkiPass(SkiPassRequest request) {
+        if(request.getSeasonType() != null) {
+            return getSkiPass(request.getSeasonType(), request.getSkiPassType());
+        } else if(request.getLiftsType() != null) {
+            return getSkiPass(request.getDayType(), request.getLiftsType(), request.getSkiPassType());
+        } else  {
+            return getSkiPass(request.getDayType(), request.getPeriodType(), request.getSkiPassType());
+        }
     }
 
-    public SkiPass getSkiPass(DayType day, PeriodType periodType) {
-        return new TimeSkiPass(nextId(), periodType, day);
+    private SkiPass getSkiPass(DayOfWeekType day, LiftsType liftsType, SkiPassType type) {
+        QuantitativeSkiPass skiPass = new QuantitativeSkiPass(nextId(), liftsType, day, type);
+        skiPasses.put(skiPass.getId(), skiPass);
+        return skiPass;
     }
 
-    public SkiPass getSkiPass(SeasonType seasonType) {
-        return new SeasonSkiPass(nextId(), seasonType);
+    private SkiPass getSkiPass(DayOfWeekType day, PeriodType periodType, SkiPassType type) {
+        PeriodSkiPass skiPass = new PeriodSkiPass(nextId(), periodType, day, type);
+        skiPasses.put(skiPass.getId(), skiPass);
+        return skiPass;
+    }
+
+    private SkiPass getSkiPass(SeasonType seasonType, SkiPassType type) {
+        SeasonSkiPass skiPass = new SeasonSkiPass(nextId(), seasonType, type);
+        skiPasses.put(skiPass.getId(), skiPass);
+        return skiPass;
     }
 
     private boolean checkId(Long id) {
         return id > 0 && id < counter;
+    }
+
+    private void removeSkiPassFromDB(Long id) {
+        skiPasses.remove(id);
     }
 }

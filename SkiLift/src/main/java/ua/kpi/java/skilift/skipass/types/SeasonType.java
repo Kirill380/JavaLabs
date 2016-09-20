@@ -1,4 +1,4 @@
-package ua.kpi.java.skilift.skipass;
+package ua.kpi.java.skilift.skipass.types;
 
 
 import java.time.Month;

@@ -1,4 +1,4 @@
-package ua.kpi.java.skilift.skipass;
+package ua.kpi.java.skilift.skipass.types;
 
 public enum LiftsType {
     TEN(10), TWENTY(20), FIFTY(50), HUNDRED(100);
