@@ -13,6 +13,17 @@ import java.util.Map;
 public final class SkiPassFactory {
     private Long counter = 1L;
     private Map<Long, SkiPass> skiPasses = new HashMap<>();
+    private static SkiPassFactory instance;
+
+    private SkiPassFactory() {
+    }
+
+    public static SkiPassFactory getInstance() {
+        if(instance == null) {
+            instance = new SkiPassFactory();
+        }
+        return instance;
+    }
 
     private Long nextId() {
         return counter++;
@@ -46,11 +57,11 @@ public final class SkiPassFactory {
         return skiPass;
     }
 
-    private boolean checkId(Long id) {
+    public boolean checkId(Long id) {
         return id > 0 && id < counter;
     }
 
-    private void removeSkiPassFromDB(Long id) {
+    public void removeSkiPassFromDB(Long id) {
         skiPasses.remove(id);
     }
 }
