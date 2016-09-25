@@ -27,7 +27,7 @@ public class MyArrayList<T> implements MyList<T>, RandomAccess {
 
     @Override
     public void add(int index, T element) {
-        rangeCheck(index);
+        rangeCheckForAdd(index);
         ensureCapacity(size + 1);
         int numToShift = size - index;
         System.arraycopy(elements, index, elements, index + 1, numToShift); // right shift
@@ -46,7 +46,7 @@ public class MyArrayList<T> implements MyList<T>, RandomAccess {
 
     @Override
     public void addAll(int index, Collection<? extends T> c) {
-        rangeCheck(index);
+        rangeCheckForAdd(index);
         Object[] a = c.toArray();
         int newElements = a.length;
         ensureCapacity(size + newElements);
@@ -130,6 +130,12 @@ public class MyArrayList<T> implements MyList<T>, RandomAccess {
     // to not throw ArrayIndexOutOfBoundsException and encapsulate implementation of list
     private void rangeCheck(int index) {
         if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+    }
+
+    private void rangeCheckForAdd(int index) {
+        if (index > size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }

@@ -1,8 +1,3 @@
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.experimental.theories.Theory;
-
-
 public interface MyListTest {
 
     void testCopyConstructor();
@@ -31,9 +26,9 @@ public interface MyListTest {
 
     void testRangeCheckGet(int wrongIndex);
 
-    void testRangeCheckAdd(int wrongIndex);
+    void testRangeCheckAdd();
 
-    void testRangeCheckAddAll(int wrongIndex);
+    void testRangeCheckAddAll();
 
     void testRangeCheckRemove(int wrongIndex);
 
