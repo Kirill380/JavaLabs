@@ -229,7 +229,7 @@ public class MyLinkedList<T> implements  MyList<T>{
         size--;
     }
 
-    // binary search of Node by index
+
     private Node<T> getNode(int index) {
         if (index < (size >> 1)) {
             Node<T> x = head;

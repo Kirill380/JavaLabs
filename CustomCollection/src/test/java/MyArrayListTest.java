@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import ua.kpi.collections.lists.MyArrayList;
 import ua.kpi.collections.lists.MyList;
 
+import java.util.ArrayList;
+
 import static com.google.common.collect.ImmutableList.of;
 import static java.util.Arrays.asList;
 
@@ -30,6 +32,22 @@ public class MyArrayListTest extends Assert implements MyListTest {
     public void testCopyConstructor() {
         list = new MyArrayList<>(of("a", "b", "c", "d"));
         assertEquals(list.size(), 4);
+    }
+
+
+    @Test
+    public void testGenerics() throws Exception {
+        MyList<A> list = new MyArrayList<>();
+        list.addAll(new ArrayList<B>(of(new B(), new B())));
+        assertEquals(2, list.size());
+    }
+
+    class A {
+
+    }
+
+    class B extends A {
+
     }
 
     @Test
