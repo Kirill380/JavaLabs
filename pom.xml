@@ -12,6 +12,7 @@
         <module>ClassLoader</module>
         <module>CustomCollection</module>
         <module>SkiLift</module>
+        <module>Stream</module>
     </modules>
 
 
