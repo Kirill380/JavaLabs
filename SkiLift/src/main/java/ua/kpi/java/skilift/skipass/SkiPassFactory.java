@@ -10,20 +10,12 @@ import ua.kpi.java.skilift.transfer.SkiPassType;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class SkiPassFactory {
+public enum SkiPassFactory {
+    INSTANCE;
+
     private Long counter = 1L;
     private Map<Long, SkiPass> skiPasses = new HashMap<>();
-    private static SkiPassFactory instance;
 
-    private SkiPassFactory() {
-    }
-
-    public static SkiPassFactory getInstance() {
-        if(instance == null) {
-            instance = new SkiPassFactory();
-        }
-        return instance;
-    }
 
     private Long nextId() {
         return counter++;
@@ -63,5 +55,9 @@ public final class SkiPassFactory {
 
     public void removeSkiPassFromDB(Long id) {
         skiPasses.remove(id);
+    }
+
+    public void clearDB() {
+        skiPasses.clear();
     }
 }

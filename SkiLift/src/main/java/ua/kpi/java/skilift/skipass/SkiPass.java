@@ -2,7 +2,6 @@ package ua.kpi.java.skilift.skipass;
 
 import ua.kpi.java.skilift.transfer.SkiPassType;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public abstract class SkiPass {

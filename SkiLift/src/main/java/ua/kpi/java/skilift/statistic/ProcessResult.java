@@ -2,9 +2,16 @@ package ua.kpi.java.skilift.statistic;
 
 
 public final class ProcessResult {
+    private Long rejectedNum = 0L;
+    private Long passedNum = 0L;
 
-    private Long rejectedNum;
-    private Long passedNum;
+    public ProcessResult() {
+    }
+
+    public ProcessResult(Long passedNum, Long rejectedNum) {
+        this.rejectedNum = rejectedNum;
+        this.passedNum = passedNum;
+    }
 
     public Long getRejectedNum() {
         return rejectedNum;
@@ -21,4 +28,5 @@ public final class ProcessResult {
     public void incrementPassed() {
         this.passedNum++;
     }
+
 }

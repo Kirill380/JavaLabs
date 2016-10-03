@@ -10,24 +10,49 @@ import java.util.Map;
 public class Turnstile {
 
     private Map<SkiPassType, ProcessResult> statistic = new HashMap<>();
-    private SkiPassFactory factory = SkiPassFactory.getInstance();
+    private SkiPassFactory factory = SkiPassFactory.INSTANCE;
 
-    public void processSkiPass(SkiPass skiPass) {
+    public boolean processSkiPass(SkiPass skiPass) {
         boolean isExist = factory.checkId(skiPass.getId());
-
         if (isExist && !skiPass.isBlocked()) {
-
-
-
+            boolean isPassed = skiPass.countLift();
+            saveResult(isPassed, skiPass.getSkiPassType());
+            return isPassed;
         } else {
-            if (statistic.containsKey(skiPass.getSkiPassType())) {
-                ProcessResult result = statistic.get(skiPass.getSkiPassType());
-                result.incrementRejected();
-            } else {
-                ProcessResult result = new ProcessResult();
-                result.incrementRejected();
-                statistic.put(skiPass.getSkiPassType(), result);
-            }
+            saveResult(false, skiPass.getSkiPassType());
+            return false;
         }
+    }
+
+
+    private void saveResult(boolean isPassed, SkiPassType type) {
+        if (statistic.containsKey(type)) {
+            ProcessResult result = statistic.get(type);
+            if(isPassed)
+                result.getPassedNum();
+            else
+                result.incrementRejected();
+        } else {
+            ProcessResult result = new ProcessResult();
+            if(isPassed)
+                result.getPassedNum();
+            else
+                result.incrementRejected();
+            statistic.put(type, result);
+        }
+    }
+
+    private ProcessResult getStatisticByType(SkiPassType type) {
+        return statistic.get(type);
+    }
+
+    private ProcessResult getTotalStatistic() {
+        long passed = 0;
+        long rejected = 0;
+        for (ProcessResult processResult : statistic.values()) {
+            passed += processResult.getPassedNum();
+            rejected += processResult.getRejectedNum();
+        }
+        return  new ProcessResult(passed, rejected);
     }
 }
