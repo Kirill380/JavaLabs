@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import static com.google.common.collect.ImmutableList.of;
 
 public class Main {
-    public static final String CLASS = "ua.kpi.java.classloading.TestModule";
+    public static final String CLASS = "ua.kpi.classloading.TestModule";
     private boolean stop = false;
 
     public static void main(String[] args) throws Exception {
