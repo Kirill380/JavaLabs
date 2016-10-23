@@ -13,20 +13,24 @@ public final class ProcessResult {
         this.passedNum = passedNum;
     }
 
-    public Long getRejectedNum() {
+    public ProcessResult plus(ProcessResult processResult) {
+        return new ProcessResult(passedNum + processResult.getPassedNum(), rejectedNum + processResult.getRejectedNum());
+    }
+    public long getRejectedNum() {
         return rejectedNum;
     }
 
-    public void incrementRejected() {
-        this.rejectedNum++;
-    }
 
-    public Long getPassedNum() {
+    public long getPassedNum() {
         return passedNum;
     }
 
-    public void incrementPassed() {
-        this.passedNum++;
-    }
 
+    public void increment(boolean passed) {
+        if(passed) {
+            this.passedNum++;
+        } else {
+            this.rejectedNum++;
+        }
+    }
 }

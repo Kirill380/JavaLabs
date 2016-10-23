@@ -45,7 +45,7 @@ public abstract class SkiPass {
         return skiPassType;
     }
 
-    protected LocalDateTime getNow() {
+    public LocalDateTime getNow() {
         return  LocalDateTime.now();
     }
 

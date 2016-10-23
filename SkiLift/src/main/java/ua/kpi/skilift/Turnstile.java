@@ -29,31 +29,23 @@ public class Turnstile {
     private void saveResult(boolean isPassed, SkiPassType type) {
         if (statistic.containsKey(type)) {
             ProcessResult result = statistic.get(type);
-            if(isPassed)
-                result.getPassedNum();
-            else
-                result.incrementRejected();
+            result.increment(isPassed);
         } else {
             ProcessResult result = new ProcessResult();
-            if(isPassed)
-                result.getPassedNum();
-            else
-                result.incrementRejected();
+            result.increment(isPassed);
             statistic.put(type, result);
         }
     }
 
-    private ProcessResult getStatisticByType(SkiPassType type) {
+    public ProcessResult getStatisticByType(SkiPassType type) {
         return statistic.get(type);
     }
 
-    private ProcessResult getTotalStatistic() {
-        long passed = 0;
-        long rejected = 0;
+    public ProcessResult getTotalStatistic() {
+        ProcessResult total = new ProcessResult();
         for (ProcessResult processResult : statistic.values()) {
-            passed += processResult.getPassedNum();
-            rejected += processResult.getRejectedNum();
+            total = total.plus(processResult);
         }
-        return  new ProcessResult(passed, rejected);
+        return total;
     }
 }
