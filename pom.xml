@@ -13,6 +13,10 @@
         <module>CustomCollection</module>
         <module>SkiLift</module>
         <module>Stream</module>
+        <module>LamdaWorkShop</module>
+        <module>IO</module>
+        <module>Parallel</module>
+        <module>Concurrency</module>
     </modules>
 
 

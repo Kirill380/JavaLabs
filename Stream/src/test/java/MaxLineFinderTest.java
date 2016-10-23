@@ -6,7 +6,7 @@ public class MaxLineFinderTest extends Assert{
 
     @Test
     public void testRegularFile() throws Exception {
-        String expectedMaxLine = "Culpa deserunt doloremque ducimus error hic iusto laboriosam minima nam, quia totam vel vitae!";
+        final String expectedMaxLine = "Culpa deserunt doloremque ducimus error hic iusto laboriosam minima nam, quia totam vel vitae!";
         Pair<Integer, String> maxLine = MaxLineFinder.findMaxLine(MaxLine.class.getClassLoader().getResourceAsStream("regular_file.txt"));
         System.out.println("Max line is \"" + maxLine.getValue() + "\" with " + maxLine.getKey() + " words.");
         assertEquals(expectedMaxLine, maxLine.getValue());
@@ -14,7 +14,7 @@ public class MaxLineFinderTest extends Assert{
 
     @Test
     public void testEmptyFile() throws Exception {
-        String expectedMaxLine = "File is empty";
+        final String expectedMaxLine = "File is empty";
         Pair<Integer, String> maxLine = MaxLineFinder.findMaxLine(MaxLine.class.getClassLoader().getResourceAsStream("empty.txt"));
         System.out.println("Max line is \"" + maxLine.getValue() + "\" with " + maxLine.getKey() + " words.");
         assertEquals(expectedMaxLine, maxLine.getValue());
