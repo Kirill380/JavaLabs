@@ -1,7 +1,9 @@
-import ua.kpi.java.skilift.skipass.SkiPass;
-import ua.kpi.java.skilift.skipass.SkiPassFactory;
-import ua.kpi.java.skilift.statistic.ProcessResult;
-import ua.kpi.java.skilift.transfer.SkiPassType;
+package ua.kpi.skilift;
+
+import ua.kpi.skilift.skipass.SkiPass;
+import ua.kpi.skilift.skipass.SkiPassFactory;
+import ua.kpi.skilift.statistic.ProcessResult;
+import ua.kpi.skilift.transfer.SkiPassType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +12,7 @@ import java.util.Map;
 public class Turnstile {
 
     private Map<SkiPassType, ProcessResult> statistic = new HashMap<>();
-    private SkiPassFactory factory = SkiPassFactory.INSTANCE;
+    private SkiPassFactory factory = SkiPassFactory.SKI_PASS_FACTORY;
 
     public boolean processSkiPass(SkiPass skiPass) {
         boolean isExist = factory.checkId(skiPass.getId());
@@ -23,7 +25,6 @@ public class Turnstile {
             return false;
         }
     }
-
 
     private void saveResult(boolean isPassed, SkiPassType type) {
         if (statistic.containsKey(type)) {

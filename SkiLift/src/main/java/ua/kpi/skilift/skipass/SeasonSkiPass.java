@@ -1,7 +1,7 @@
-package ua.kpi.java.skilift.skipass;
+package ua.kpi.skilift.skipass;
 
-import ua.kpi.java.skilift.skipass.types.SeasonType;
-import ua.kpi.java.skilift.transfer.SkiPassType;
+import ua.kpi.skilift.skipass.types.SeasonType;
+import ua.kpi.skilift.transfer.SkiPassType;
 
 import java.time.LocalDate;
 import java.time.Year;
@@ -9,7 +9,7 @@ import java.time.Year;
 public class SeasonSkiPass extends SkiPass {
     private final LocalDate from;
     private final LocalDate to;
-    private Integer lifts;
+    private int lifts;
 
     SeasonSkiPass(Long id, SeasonType seasonType, SkiPassType type) {
         super(id, type);
@@ -25,11 +25,15 @@ public class SeasonSkiPass extends SkiPass {
             return true;
         }
         return false;
+    }
 
+    @Override
+    public int getLifts() {
+        return lifts;
     }
 
     private boolean isRightPeriod() {
-        LocalDate now = LocalDate.now();
+        LocalDate now = getNow().toLocalDate();
         return now.isBefore(to) && now.isAfter(from);
     }
 

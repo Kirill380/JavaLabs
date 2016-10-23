@@ -1,15 +1,13 @@
-package ua.kpi.java.skilift.skipass;
+package ua.kpi.skilift.skipass;
 
-import ua.kpi.java.skilift.skipass.types.DayOfWeekType;
-import ua.kpi.java.skilift.skipass.types.LiftsType;
-import ua.kpi.java.skilift.transfer.SkiPassType;
-
-import java.time.LocalDate;
+import ua.kpi.skilift.skipass.types.DayOfWeekType;
+import ua.kpi.skilift.skipass.types.LiftsType;
+import ua.kpi.skilift.transfer.SkiPassType;
 
 public class QuantitativeSkiPass extends SkiPass {
     private final LiftsType liftsType;
     private final DayOfWeekType dayType;
-    private Integer currAmountOfLifts;
+    private int currAmountOfLifts;
 
     QuantitativeSkiPass(Long id, LiftsType liftsType, DayOfWeekType dayType, SkiPassType type) {
         super(id, type);
@@ -29,11 +27,16 @@ public class QuantitativeSkiPass extends SkiPass {
 
     }
 
+    @Override
+    public int getLifts() {
+        return liftsType.getAmount() - currAmountOfLifts;
+    }
+
     private boolean isExpired() {
         return currAmountOfLifts == 0;
     }
 
     private boolean isRightDay() {
-        return dayType.isRightDay(LocalDate.now().getDayOfWeek());
+        return dayType.isRightDay(getNow().getDayOfWeek());
     }
 }

@@ -1,10 +1,10 @@
-package ua.kpi.java.skilift.transfer;
+package ua.kpi.skilift.transfer;
 
 
-import ua.kpi.java.skilift.skipass.types.DayOfWeekType;
-import ua.kpi.java.skilift.skipass.types.LiftsType;
-import ua.kpi.java.skilift.skipass.types.PeriodType;
-import ua.kpi.java.skilift.skipass.types.SeasonType;
+import ua.kpi.skilift.skipass.types.DayOfWeekType;
+import ua.kpi.skilift.skipass.types.LiftsType;
+import ua.kpi.skilift.skipass.types.PeriodType;
+import ua.kpi.skilift.skipass.types.SeasonType;
 
 //Data transfer object
 public class SkiPassRequest {
@@ -12,12 +12,14 @@ public class SkiPassRequest {
     private final DayOfWeekType dayType;
     private final LiftsType liftsType;
     private final PeriodType periodType;
+    private final SkiPassType skiPassType;
 
     public SkiPassRequest(LiftsType liftsType, DayOfWeekType dayType) {
         this.liftsType = liftsType;
         this.dayType = dayType;
         this.periodType = null;
         this.seasonType = null;
+        this.skiPassType = dayType == DayOfWeekType.WEEKDAYS ? SkiPassType.WEEKDAY_LIFTS : SkiPassType.WEEKEND_LIFTS;
     }
 
 
@@ -26,6 +28,7 @@ public class SkiPassRequest {
         this.dayType = dayType;
         this.liftsType = null;
         this.seasonType = null;
+        this.skiPassType = dayType == DayOfWeekType.WEEKDAYS ? SkiPassType.WEEKDAY_PERIOD : SkiPassType.WEEKEND_PERIOD;
     }
 
     public SkiPassRequest(SeasonType seasonType) {
@@ -33,6 +36,7 @@ public class SkiPassRequest {
         this.dayType = null;
         this.liftsType = null;
         this.periodType = null;
+        this.skiPassType = SkiPassType.SEASON;
     }
 
     public SeasonType getSeasonType() {
@@ -55,20 +59,6 @@ public class SkiPassRequest {
 
 
     public SkiPassType getSkiPassType() {
-        if (seasonType != null) {
-            return SkiPassType.SEASON;
-        } else if (dayType == DayOfWeekType.WEEKDAYS) {
-            if (liftsType != null) {
-                return SkiPassType.WEEKDAY_LIFTS;
-            } else {
-                return SkiPassType.WEEKDAY_PERIOD;
-            }
-        } else {
-            if (liftsType != null) {
-                return SkiPassType.WEEKEND_LIFTS;
-            } else {
-                return SkiPassType.WEEKEND_PERIOD;
-            }
-        }
+        return skiPassType;
     }
 }

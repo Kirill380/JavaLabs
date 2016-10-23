@@ -1,4 +1,4 @@
-package ua.kpi.java.skilift.skipass.types;
+package ua.kpi.skilift.skipass.types;
 
 
 import java.time.DayOfWeek;

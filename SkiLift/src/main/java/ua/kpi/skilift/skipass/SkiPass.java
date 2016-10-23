@@ -1,6 +1,6 @@
-package ua.kpi.java.skilift.skipass;
+package ua.kpi.skilift.skipass;
 
-import ua.kpi.java.skilift.transfer.SkiPassType;
+import ua.kpi.skilift.transfer.SkiPassType;
 
 import java.time.LocalDateTime;
 
@@ -34,6 +34,8 @@ public abstract class SkiPass {
 
     public abstract boolean countLift();
 
+    public abstract int getLifts();
+
     public LocalDateTime getExpiredDate() {
         return expiredDate;
     }
@@ -42,4 +44,9 @@ public abstract class SkiPass {
     public SkiPassType getSkiPassType() {
         return skiPassType;
     }
+
+    protected LocalDateTime getNow() {
+        return  LocalDateTime.now();
+    }
+
 }

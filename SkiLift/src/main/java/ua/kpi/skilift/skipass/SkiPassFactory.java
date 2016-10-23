@@ -1,17 +1,17 @@
-package ua.kpi.java.skilift.skipass;
+package ua.kpi.skilift.skipass;
 
-import ua.kpi.java.skilift.skipass.types.DayOfWeekType;
-import ua.kpi.java.skilift.skipass.types.LiftsType;
-import ua.kpi.java.skilift.skipass.types.PeriodType;
-import ua.kpi.java.skilift.skipass.types.SeasonType;
-import ua.kpi.java.skilift.transfer.SkiPassRequest;
-import ua.kpi.java.skilift.transfer.SkiPassType;
+import ua.kpi.skilift.skipass.types.DayOfWeekType;
+import ua.kpi.skilift.skipass.types.LiftsType;
+import ua.kpi.skilift.skipass.types.PeriodType;
+import ua.kpi.skilift.skipass.types.SeasonType;
+import ua.kpi.skilift.transfer.SkiPassRequest;
+import ua.kpi.skilift.transfer.SkiPassType;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public enum SkiPassFactory {
-    INSTANCE;
+    SKI_PASS_FACTORY;
 
     private Long counter = 1L;
     private Map<Long, SkiPass> skiPasses = new HashMap<>();
@@ -50,7 +50,7 @@ public enum SkiPassFactory {
     }
 
     public boolean checkId(Long id) {
-        return id > 0 && id < counter;
+        return skiPasses.containsKey(id);
     }
 
     public void removeSkiPassFromDB(Long id) {

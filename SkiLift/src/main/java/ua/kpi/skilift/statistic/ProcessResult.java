@@ -1,4 +1,4 @@
-package ua.kpi.java.skilift.statistic;
+package ua.kpi.skilift.statistic;
 
 
 public final class ProcessResult {

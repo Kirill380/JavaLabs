@@ -1,4 +1,4 @@
-package ua.kpi.java.skilift.transfer;
+package ua.kpi.skilift.transfer;
 
 
 public enum  SkiPassType {
