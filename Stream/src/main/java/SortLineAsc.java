@@ -5,7 +5,7 @@ import static java.lang.Integer.compare;
 
 public class SortLineAsc {
 
-    public static void sort(InputStream targetFile, FileWriter destFile) throws IOException {
+    public static void sort(InputStream targetFile, Writer destFile) throws IOException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(targetFile));
               PrintWriter pw = new PrintWriter(new BufferedWriter(destFile))) {
             Stream<String> lines = br.lines();
