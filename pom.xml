@@ -17,6 +17,7 @@
         <module>IO</module>
         <module>Parallel</module>
         <module>Concurrency</module>
+        <module>DataAccess</module>
     </modules>
 
 
